@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodepool-operator
+spec:
+  selector:
+    matchLabels:
+      app: nodepool-operator
+  template:
+    metadata:
+      labels:
+        app: nodepool-operator
+    spec:
+      containers:
+      - name: nodepool-operator
+        image: trojanekkk/nodepool-operator
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: Exists
+        effect: NoSchedule

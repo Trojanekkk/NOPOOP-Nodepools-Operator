@@ -1,0 +1,49 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: nodepools.cluster.trojanekkk.com
+spec:
+  scope: Cluster
+  group: cluster.trojanekkk.com
+  names:
+    kind: NodePool
+    plural: nodepools
+    singular: nodepool
+    shortNames:
+    - nopo
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              selectors:
+                type: object
+                properties:
+                  matchLabels:
+                    type: object
+                    additionalProperties:
+                      type: string
+              taints:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    value:
+                      type: string
+                    effect:
+                      type: string
+                      enum:
+                      - NoSchedule
+                      - PreferNoSchedule
+                      - NoExecute
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true

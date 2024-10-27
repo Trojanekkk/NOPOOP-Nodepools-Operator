@@ -1,0 +1,12 @@
+apiVersion: cluster.trojanekkk.com/v1
+kind: NodePool
+metadata:
+  name: apps
+spec:
+  selectors:
+    matchLabels:
+      pool: apps
+  taints:
+  - key: "node-role"
+    value: "apps"
+    effect: "NoSchedule"
