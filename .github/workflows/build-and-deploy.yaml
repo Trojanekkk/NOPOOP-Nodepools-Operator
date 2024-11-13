@@ -30,10 +30,7 @@ jobs:
           flavor: |
             latest=true
           tags: |
-            type=sha
             type=semver,pattern={{version}}
-            type=semver
-            type=ref,event=tag
 
       - name: Build and push Docker image
         id: push
