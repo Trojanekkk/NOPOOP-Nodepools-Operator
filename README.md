@@ -32,6 +32,8 @@ kubectl apply -f << EOF
 EOF
 ```
 
+4. (Re)Add nodes to your cluster
+
 
 
 ### helm
