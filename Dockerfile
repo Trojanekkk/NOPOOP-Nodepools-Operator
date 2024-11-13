@@ -12,4 +12,5 @@ WORKDIR /app
 # Copy the app directory contents into the container at /app
 COPY app /app
 
-CMD ["python", "main.py"]
+# Run the operator
+CMD ["kopf", "run", "main.py"]

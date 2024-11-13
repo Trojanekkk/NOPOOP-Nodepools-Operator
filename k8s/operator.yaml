@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodepools-operator
+spec:
+  selector:
+    matchLabels:
+      app: nodepools-operator
+  template:
+    metadata:
+      labels:
+        app: nodepools-operator
+    spec:
+      serviceAccountName: nodepools-operator-sa
+      containers:
+      - name: nodepools-operator
+        image: trojanekkk/nodepools-operator:latest
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: Exists
+        effect: NoSchedule
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nodepools-operator-sa
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nodepools-operator-cr
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/status
+  verbs:
+  - 'patch'
+  - 'watch'
+  - 'list'
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - 'create'
+- apiGroups:
+  - "cluster.trojanekkk.com"
+  resources:
+  - nodepools
+  verbs:
+  - 'list'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: nodepools-operator-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nodepools-operator-cr
+subjects:
+- kind: ServiceAccount
+  name: nodepools-operator-sa
+  namespace: default

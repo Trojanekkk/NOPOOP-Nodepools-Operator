@@ -9,7 +9,7 @@ def get_nodepools():
 
   if (len(nodepools) == 0):
     logging.warning("No NodePools found")
-    return 0
+    return []
   
   nodepools_obj = [ NodePool(np['metadata']['name'], np['spec']['selectors'], np['spec']['taints']) for np in nodepools ]
 
