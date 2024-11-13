@@ -29,6 +29,7 @@ jobs:
           images: trojanekkk/nodepools-operator
           flavor: |
             latest=true
+          tags: |
             type=sha
 
       - name: Build and push Docker image
