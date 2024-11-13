@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: nodepool-operator
-        image: trojanekkk/nodepool-operator:latest
+        image: trojanekkk/nodepools-operator:latest
         resources:
           limits:
             memory: "64Mi"
