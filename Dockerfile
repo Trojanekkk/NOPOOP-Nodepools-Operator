@@ -13,4 +13,4 @@ WORKDIR /app
 COPY app /app
 
 # Run the operator
-CMD ["python", "main.py"]
+CMD ["kopf", "run", "main.py"]

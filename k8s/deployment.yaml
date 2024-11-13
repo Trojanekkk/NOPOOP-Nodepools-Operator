@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodepool-operator
+  name: nodepools-operator
 spec:
   selector:
     matchLabels:
-      app: nodepool-operator
+      app: nodepools-operator
   template:
     metadata:
       labels:
-        app: nodepool-operator
+        app: nodepools-operator
     spec:
       containers:
-      - name: nodepool-operator
+      - name: nodepools-operator
         image: trojanekkk/nodepools-operator:latest
         resources:
           limits:
-            memory: "64Mi"
-            cpu: "100m"
+            memory: "256Mi"
+            cpu: "200m"
           requests:
             memory: "32Mi"
             cpu: "50m"

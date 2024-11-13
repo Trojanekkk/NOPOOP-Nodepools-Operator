@@ -16,7 +16,7 @@ kubectl apply -f https://raw.githubusercontent.com/Trojanekkk/NOPOOP-Nodepools-O
 
 3. Create a NodePool resource
 ```bash
-kubectl apply -f << EOF
+cat <<EOF | kubectl apply -f -
   apiVersion: cluster.trojanekkk.com/v1
   kind: NodePool
   metadata:
@@ -24,7 +24,7 @@ kubectl apply -f << EOF
   spec:
     selectors:
       matchLabels:
-        pool: apps
+        kubernetes.io/hostname: kind-worker
     taints:
     - key: "node-role"
       value: "apps"
